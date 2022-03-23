@@ -6,7 +6,8 @@ if __name__ == '__main__':
     print(is_leap(2021))
 
     print(Tree().get('./', dirs_only=False))
-    token = '<your token>'
+    token ='<your token>'
 
     wrapper = WeatherWrapper(token)
     print(wrapper.get_temperature('London'))
+
