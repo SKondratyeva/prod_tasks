@@ -1,0 +1,8 @@
+/home/ubuntu/task7/cmake-with-flask/build/CMakeFiles/rebuild_cache.dir
+/home/ubuntu/task7/cmake-with-flask/build/CMakeFiles/edit_cache.dir
+/home/ubuntu/task7/cmake-with-flask/build/B/CMakeFiles/rebuild_cache.dir
+/home/ubuntu/task7/cmake-with-flask/build/B/CMakeFiles/ClassLib.dir
+/home/ubuntu/task7/cmake-with-flask/build/B/CMakeFiles/edit_cache.dir
+/home/ubuntu/task7/cmake-with-flask/build/C/CMakeFiles/rebuild_cache.dir
+/home/ubuntu/task7/cmake-with-flask/build/C/CMakeFiles/C.dir
+/home/ubuntu/task7/cmake-with-flask/build/C/CMakeFiles/edit_cache.dir

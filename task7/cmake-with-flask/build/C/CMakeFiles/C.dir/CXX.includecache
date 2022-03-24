@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+..//B/lib.h
+
+/home/ubuntu/task7/cmake-with-flask/C/main.cpp
+main.h
+/home/ubuntu/task7/cmake-with-flask/C/main.h
+iostream
+-
+
+/home/ubuntu/task7/cmake-with-flask/C/main.h
+B/lib.h
+/home/ubuntu/task7/cmake-with-flask/C/B/lib.h
+
