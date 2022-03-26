@@ -22,7 +22,6 @@ class WeatherWrapper:
         response = self.get(city, url)
         if response.status_code != 200:
             raise AttributeError('Incorrect city')
-
         return response.json()
 
     def get_temperature(self, city: str) -> float:
