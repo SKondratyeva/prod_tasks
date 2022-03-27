@@ -1,55 +1,38 @@
 from src.tree_utils_02.tree import Tree
 import tempfile
 from src.tree_utils_02.node import FileNode
-import os, unittest
+import os, unittest, pytest
 from unittest.mock import patch
 from unittest.mock import MagicMock
-import sys
+import sys, requests
 
 temp = tempfile.TemporaryFile()
 
-class MyTestCase(unittest.TestCase):
-
-    def test_no_path(self):
-        with self.assertRaises(AttributeError):
-            tree = Tree()
-            tree.get('', recurse_call=False, dirs_only = False)
-
-
-if __name__ == '__main__':
-    unittest.main()
-
-class MyTestCase2(unittest.TestCase):
-    temp = tempfile.TemporaryFile()
-    current_path = temp.name
-    def test_no_path(self):
-
-        with self.assertRaises(AttributeError):
-            temp = tempfile.TemporaryFile()
-            current_path = temp.name
-            tree = Tree()
-            tree.get(current_path, recurse_call=False, dirs_only = True)
-
-        with self.assertRaises(TypeError):
-            tree = Tree()
-            tree.construct_filenode(25, True)
-            tree.get(1, recurse_call=False, dirs_only=True)
-
-
-if __name__ == '__main__':
-    unittest.main()
-
-
 def test_tree_one():
     tree = Tree()
+
+    with pytest.raises(TypeError) as err:
+         tree.construct_filenode(25, True)
+
     assert tree.construct_filenode(temp.name, is_dir=False) == tree.get(temp.name, False, recurse_call=False)
 
 def test_tree_two():
     tree = Tree()
+
+    with pytest.raises(AttributeError):
+        tree.get('', recurse_call=False, dirs_only = False)
+
+    with pytest.raises(TypeError) as err2:
+        requests.get(22, recurse_call=False, dirs_only=False)
+
     assert None == tree.get(temp.name, True, recurse_call=True)
 
 def test_construct_filenode():
     current_path = './'
+
+    with pytest.raises(TypeError) as err2:
+         os.path.basename(2)
+
     filename = os.path.basename(current_path)
     is_dir = True
     tree = Tree()

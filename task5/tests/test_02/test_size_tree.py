@@ -54,5 +54,3 @@ def test_update_filenode():
     assert fzn == size.update_filenode(fzn)
 
 
-
-

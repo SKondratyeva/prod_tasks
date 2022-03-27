@@ -126,6 +126,7 @@ def test_get_tom_diff():
     WeatherWrapper.get_tomorrow_temperature = Mock(return_value=6)
     WeatherWrapper.get_temperature = Mock(return_value=7)
 
+
     assert WeatherWrapper(api_key='dfgh').get_tomorrow_diff(city='dfg') \
        == 'The weather in dfg tomorrow will be colder than today'
 
