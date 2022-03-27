@@ -2,7 +2,7 @@ from src.weather_03.weather_wrapper import WeatherWrapper
 import unittest
 from unittest.mock import patch
 import requests
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, Mock
 
 
 BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
@@ -60,6 +60,7 @@ if __name__ == '__main__':
     unittest.main()
 
 def test_get_temp():
+
     data = {'main': {'temp': 10}}
     mock_obj = MockResponse(data, 200)
 
@@ -86,4 +87,51 @@ def test_get_temp_diff():
         status = 'warmer'
         temperature_diff = 0
         assert f'Weather in {city1} is {status} than in {city2} by {temperature_diff} degrees' ==  diff
+
+def test_get_tom_temp():
+    data = {'list': [{'main': {'temp': 10}}]*8}
+    mock_obj = MockResponse(data, 200)
+
+    with patch.object(requests, 'get', return_value = mock_obj) as mock_method:
+        thing = WeatherWrapper(api_key='fgf')
+        temp = thing.get_tomorrow_temperature('fgf')
+
+
+    assert 10 == temp
+
+
+def test_get_tom_diff():
+
+    WeatherWrapper.get_tomorrow_temperature = Mock(return_value=10)
+    WeatherWrapper.get_temperature = Mock(return_value=4)
+
+    assert WeatherWrapper(api_key='dfgh').get_tomorrow_diff(city='dfg') \
+        == 'The weather in dfg tomorrow will be much warmer than today'
+
+
+    WeatherWrapper.get_tomorrow_temperature = Mock(return_value=10)
+    WeatherWrapper.get_temperature = Mock(return_value=9)
+
+    assert WeatherWrapper(api_key='dfgh').get_tomorrow_diff(city='dfg') \
+       == 'The weather in dfg tomorrow will be warmer than today'
+
+
+    WeatherWrapper.get_tomorrow_temperature = Mock(return_value=7)
+    WeatherWrapper.get_temperature = Mock(return_value=11)
+
+    assert WeatherWrapper(api_key='dfgh').get_tomorrow_diff(city='dfg') \
+       == 'The weather in dfg tomorrow will be much colder than today'
+
+
+    WeatherWrapper.get_tomorrow_temperature = Mock(return_value=6)
+    WeatherWrapper.get_temperature = Mock(return_value=7)
+
+    assert WeatherWrapper(api_key='dfgh').get_tomorrow_diff(city='dfg') \
+       == 'The weather in dfg tomorrow will be colder than today'
+
+    WeatherWrapper.get_tomorrow_temperature = Mock(return_value=7)
+    WeatherWrapper.get_temperature = Mock(return_value=7)
+
+    assert WeatherWrapper(api_key='dfgh').get_tomorrow_diff(city='dfg') \
+       == 'The weather in dfg tomorrow will be the same than today'
 
