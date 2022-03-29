@@ -2,6 +2,7 @@ from src.simple_library_01.functions import is_leap
 from src.tree_utils_02.tree import Tree
 from src.weather_03.weather_wrapper import WeatherWrapper
 
+
 if __name__ == '__main__':
     print(is_leap(2021))
 
@@ -10,4 +11,5 @@ if __name__ == '__main__':
 
     wrapper = WeatherWrapper(token)
     print(wrapper.get_temperature('London'))
+    
 

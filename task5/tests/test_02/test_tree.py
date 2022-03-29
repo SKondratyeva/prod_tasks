@@ -8,22 +8,49 @@ import sys, requests
 
 temp = tempfile.TemporaryFile()
 
-def test_tree_one():
+def test_not_dir():
+    while str(os.getcwd())[-5:] != 'task5':
+        os.chdir("..")
+
+    with pytest.raises(AttributeError):
+        tree = Tree()
+        path_to_file = r'main.py'
+        tree.get(path_to_file, recurse_call=False, dirs_only=True)
+
+def test_tree_one_attr():
     tree = Tree()
 
     with pytest.raises(TypeError) as err:
          tree.construct_filenode(25, True)
 
+def test_tree_one():
+    tree = Tree()
     assert tree.construct_filenode(temp.name, is_dir=False) == tree.get(temp.name, False, recurse_call=False)
+
+def test_tree_one_one():
+    tree = Tree()
+    with pytest.raises(TypeError) as err2:
+         tree.construct_filenode(5, is_dir=False) == tree.get(temp.name, False, recurse_call=False)
+
+def test_tree_three():
+    tree = Tree()
+    with pytest.raises(AttributeError):
+        tree.get(22, True, recurse_call=True)
+
+
+
+def test_tree_four():
+    tree = Tree()
+    with pytest.raises(TypeError) as err2:
+        requests.get(22, recurse_call=False, dirs_only=False)
+
 
 def test_tree_two():
     tree = Tree()
 
     with pytest.raises(AttributeError):
-        tree.get('', recurse_call=False, dirs_only = False)
+        tree.get('', recurse_call=False, dirs_only = True)
 
-    with pytest.raises(TypeError) as err2:
-        requests.get(22, recurse_call=False, dirs_only=False)
 
     assert None == tree.get(temp.name, True, recurse_call=True)
 
@@ -32,6 +59,7 @@ def test_construct_filenode():
 
     with pytest.raises(TypeError) as err2:
          os.path.basename(2)
+
 
     filename = os.path.basename(current_path)
     is_dir = True
