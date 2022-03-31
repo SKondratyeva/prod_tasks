@@ -20,5 +20,5 @@ def main():
 
 
 if __name__ == '__main__':
-    args = parse_args()
-    app.run(port=args.port, host=args.host)
+   # args = parse_args()
+    app.run(port=5000, host='0.0.0.0')
